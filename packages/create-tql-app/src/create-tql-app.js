@@ -163,6 +163,7 @@ packages/*/build/
             );
             resolve(pkg);
           } catch (e) {
+            console.log(e);
             reject(Error("Could not update project files"));
           }
         });
