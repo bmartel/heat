@@ -112,21 +112,24 @@ const createProjectTasks = ({ newAppDir }) => {
     {
       title: "Clean up",
       task: () => {
-        try {
-          const appName = newAppDir.split("/").pop() || "tql-app";
-          const pkgPath = path.join(newAppDir, "package.json");
-          const pkgContent = fs.readFileSync(pkgPath, "utf8");
-          const pkg = JSON.parse(pkgContent);
-          delete pkg.publishConfig;
-          delete pkg.keywords;
-          pkg.name = appName;
-          pkg.description = "TODO: Add description";
-          pkg.version = "0.0.1";
-          pkg.private = true;
-          fs.writeFileSync(pkgPath, JSON.stringify(pkg));
-        } catch (e) {
-          throw new Error("Could not move project files");
-        }
+        return new Promise((resolve, reject) => {
+          try {
+            const appName = newAppDir.split("/").pop() || "tql-app";
+            const pkgPath = path.join(newAppDir, "package.json");
+            const pkgContent = fs.readFileSync(pkgPath, "utf8");
+            const pkg = JSON.parse(pkgContent);
+            delete pkg.publishConfig;
+            delete pkg.keywords;
+            pkg.name = appName;
+            pkg.description = "TODO: Add description";
+            pkg.version = "0.0.1";
+            pkg.private = true;
+            fs.writeFileSync(pkgPath, JSON.stringify(pkg));
+            resolve(pkg);
+          } catch (e) {
+            reject(Error("Could not update project files"));
+          }
+        });
       },
     },
   ];
