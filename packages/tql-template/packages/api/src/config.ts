@@ -1,5 +1,13 @@
 import 'dotenv/config';
-import ormconfig from '../ormconfig.json';
+import { ConnectionOptions } from 'typeorm';
+import orm from '../ormconfig.json';
+
+type MongoConnectionOptions = ConnectionOptions & {
+  username?: string;
+  password?: string;
+};
+
+const ormconfig = orm as MongoConnectionOptions;
 
 export const ENV = process.env.NODE_ENV || 'production';
 export const PORT = +(process.env.PORT || 3000);

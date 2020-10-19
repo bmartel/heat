@@ -1,0 +1,59 @@
+version: '3.6'
+
+services:
+  mongodb:
+    image: mongo:4.4-bionic
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+    volumes:
+      - db_data:/data/db
+
+  api:
+    depends_on:
+      - mongodb
+    ports:
+      - ${API_PORT}:${API_PORT}
+    restart: always
+    build:
+      context: ./packages/api
+      cmd: start
+    environment:
+      PORT: ${API_PORT}
+      NODE_ENV: ${NODE_ENV}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET: ${APP_SECRET}
+      NODE_TLS_REJECT_UNAUTHORIZED: '0'
+    volumes:
+      - ./packages/api:/home/node/app
+      - api_node_modules:/home/node/app/node_modules
+
+  web:
+    depends_on:
+      - api
+    ports:
+      - ${WEB_PORT}:${WEB_PORT}
+    restart: always
+    build:
+      context: ./packages/web
+      cmd: start
+    environment:
+      PORT: ${WEB_PORT}
+      NODE_ENV: ${NODE_ENV}
+      API_URL: ${API_URL}
+    volumes:
+      - ./packages/web:/home/node/app
+      - web_node_modules:/home/node/app/node_modules
+
+volumes:
+  db_data:
+  api_node_modules:
+  web_node_modules:

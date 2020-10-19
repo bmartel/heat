@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 
 import decompress from "decompress";
 import decompressTargz from "decompress-targz";
@@ -24,6 +25,12 @@ const style = {
 };
 
 const NPM_URL = "https://registry.npmjs.org/@martel/tql-template";
+
+const randomString = (len) =>
+  crypto
+    .randomBytes(Math.ceil(len / 2))
+    .toString("hex")
+    .slice(0, len);
 
 const latestReleaseTarFile = async () => {
   const response = await axios.get(NPM_URL);
@@ -125,6 +132,19 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.version = "0.0.1";
             pkg.private = true;
             pkg.scripts.build = "lerna run build";
+
+            const envFile = fs.readFileSync(
+              path.join(newAppDir, ".env.example"),
+              "utf8"
+            );
+            fs.writeFileSync(
+              path.join(newAppDir, ".env"),
+              `
+${envFile}
+APP_SECRET=${randomString(32)}
+            `
+            );
+
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
             fs.writeFileSync(
               path.join(newAppDir, ".gitignore"),
@@ -137,6 +157,7 @@ packages/*/lib/
 packages/*/dist/
 packages/*/build/
 *.log
+*.env
             `
             );
             resolve(pkg);

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import * as express from 'express';
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import typeDefs from './schema';
 import resolvers from './resolvers';
@@ -8,7 +8,7 @@ import { PORT, TypeORM } from './config';
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-createConnection(TypeORM)
+createConnection(TypeORM as any)
   .then(async () => {
     // create express app
     const app = express();
