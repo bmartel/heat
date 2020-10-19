@@ -2,6 +2,7 @@
   "name": "@martel/create-tql-app",
   "version": "0.1.1",
   "description": "tql app generator",
+  "type": "module",
   "keywords": [
     "tql",
     "template",
