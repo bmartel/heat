@@ -124,7 +124,7 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.description = "TODO: Add description";
             pkg.version = "0.0.1";
             pkg.private = true;
-            fs.writeFileSync(pkgPath, JSON.stringify(pkg));
+            fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
             resolve(pkg);
           } catch (e) {
             reject(Error("Could not update project files"));
