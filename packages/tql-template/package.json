@@ -3,7 +3,6 @@
   "version": "0.1.1",
   "license": "MIT",
   "description": "A project template for creating new tql applications",
-  "private": true,
   "workspaces": [
     "packages/*"
   ],
