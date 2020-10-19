@@ -153,20 +153,19 @@ const createProjectTasks = ({ newAppDir }) => {
               fs.readFileSync(path.join(__dirname, "../stubs/Makefile"), "utf8")
             );
 
+            const dockerfile = fs.readFileSync(
+              path.join(__dirname, "../stubs/Dockerfile.pkg"),
+              "utf8"
+            );
+
             fs.writeFileSync(
               path.join(newAppDir, "packages/api/Dockerfile"),
-              fs.readFileSync(
-                path.join(__dirname, "../stubs/Dockerfile"),
-                "utf8"
-              )
+              dockerfile.replaceAll("pkg", "api")
             );
 
             fs.writeFileSync(
               path.join(newAppDir, "packages/web/Dockerfile"),
-              fs.readFileSync(
-                path.join(__dirname, "../stubs/Dockerfile"),
-                "utf8"
-              )
+              dockerfile.replaceAll("pkg", "web")
             );
 
             fs.writeFileSync(
