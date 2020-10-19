@@ -1,6 +1,7 @@
 import ts from "typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 import typescript from "rollup-plugin-typescript2";
 import { terser } from "rollup-plugin-terser";
 
@@ -18,6 +19,7 @@ export default {
     commonjs({
       include: /node_modules/,
     }),
+    json(),
     typescript({
       typescript: ts,
     }),

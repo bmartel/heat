@@ -1,11 +1,11 @@
-# `@martel/tql-template`
+# `@martel/create-tql-app`
 
 > TODO: description
 
 ## Usage
 
 ```
-const tqlTemplate = require('@martel/tql-template');
+const createTqlApp = require('@martel/create-tql-app');
 
 // TODO: DEMONSTRATE API
 ```

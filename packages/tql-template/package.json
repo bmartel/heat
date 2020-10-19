@@ -1,0 +1,62 @@
+{
+  "name": "@martel/tql-template",
+  "version": "0.1.4",
+  "license": "MIT",
+  "description": "A project template for creating new tql applications",
+  "workspaces": [
+    "packages/*"
+  ],
+  "keywords": [
+    "tql",
+    "typescript",
+    "hyperapp",
+    "koa",
+    "graphql",
+    "mongodb",
+    "lerna",
+    "yarn",
+    "monorepo",
+    "csa-template",
+    "template"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "start": "lerna run start",
+    "build": "lerna run build",
+    "coverage": "jest --coverage",
+    "format": "prettier --write \"packages/**/*.{ts,js,jsx,tsx}\"",
+    "lint": "prettier --check \"packages/**/*.{ts,js,jsx,tsx}\"",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@martel/hyperapp-scripts-snowpack": "^0.1.2",
+    "@snowpack/plugin-build-script": "^2.0.8",
+    "@snowpack/plugin-optimize": "^0.2.3",
+    "autoprefixer": "^10.0.1",
+    "cssnano": "^4.1.10",
+    "dotenv": "^8.2.0",
+    "jest": "^26.5.2",
+    "postcss": "^8.1.1",
+    "postcss-cli": "^8.1.0",
+    "prettier": "^2.1.2",
+    "snowpack": "^2.13.3",
+    "tailwindcss": "^1.8.12"
+  },
+  "dependencies": {
+    "@rollup/plugin-json": "^4.1.0"
+  }
+}

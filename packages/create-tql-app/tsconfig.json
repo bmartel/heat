@@ -1,11 +1,13 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./packages",
-    "paths": {
-      "@app/web": ["web/src"],
-      "@app/api": ["api/src"],
-      "@app/*": ["*/src"]
-    }
-  }
+    "lib": ["DOM"],
+    "outDir": "./lib",
+    "noEmit": false,
+    "strict": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"]
 }

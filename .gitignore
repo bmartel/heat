@@ -1,4 +1,7 @@
 node_modules
-build
-dist
 web_modules
+build/
+dist/
+packages/*/lib/
+packages/*/dist/
+packages/*/build/
