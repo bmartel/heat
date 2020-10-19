@@ -133,70 +133,47 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.private = true;
             pkg.scripts.build = "lerna run build";
 
+            const envContent = fs.readfilesync(
+              path.join(__dirname, "./stubs/env"),
+              "utf8"
+            );
             fs.writeFileSync(
               path.join(newAppDir, ".env"),
-              `
-APP_SECRET=${randomString(32)}
-NODE_ENV=development
-API_PORT=3000
-WEB_PORT=8080
-
-API_URL=http://localhost:3000
-
-DB_TYPE=mongodb
-DB_HOST=mongodb
-DB_PORT=27017
-DB_USERNAME=changeme
-DB_PASSWORD=changeme
-DB_NAME=test
-`
-            );
-
-            fs.writeFileSync(
-              path.join(newAppDir, ".dockerignore"),
-              `
-node_modules
-Dockerfile
-.dockerignore
-.git
-.github
-dist
-build
-web_modules
-integrationtests
-loadtests
-.example.env
-docker-compose.yml
-LICENSE
-README.md
-`
-            );
-
-            fs.writeFileSync(
-              path.join(newAppDir, ".npmignore"),
-              `
-.build
-build
-web_modules
-`
+              envContent
+                .replace(":secret:", randomString(32))
+                .replace(":password:", randomString(32))
+                .replace(":user:", randomString(16))
+                .replace(":dbname:", randomString(16))
             );
 
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
-            fs.writeFileSync(
-              path.join(newAppDir, ".gitignore"),
-              `
-node_modules
-web_modules
-build/
-dist/
-lib/
-packages/*/lib/
-packages/*/dist/
-packages/*/build/
-*.log
-*.env
-`
+
+            fs.writefilesync(
+              path.join(newappdir, ".dockerignore"),
+              fs.readfilesync(
+                path.join(__dirname, "./stubs/dockerignore"),
+                "utf8"
+              )
             );
+
+            fs.writefilesync(
+              path.join(newappdir, ".npmignore"),
+              fs.readfilesync(path.join(__dirname, "./stubs/npmignore"), "utf8")
+            );
+
+            fs.writefilesync(
+              path.join(newappdir, ".gitignore"),
+              fs.readfilesync(path.join(__dirname, "./stubs/gitignore"), "utf8")
+            );
+
+            fs.writefilesync(
+              path.join(newappdir, "docker-compose.yml"),
+              fs.readfilesync(
+                path.join(__dirname, "./stubs/docker-compose.yml"),
+                "utf8"
+              )
+            );
+
             resolve(pkg);
           } catch (e) {
             console.log(e);

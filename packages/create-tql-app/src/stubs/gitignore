@@ -1,0 +1,11 @@
+node_modules
+web_modules
+build/
+dist/
+lib/
+packages/*/lib/
+packages/*/dist/
+packages/*/build/
+*.log
+*.env
+

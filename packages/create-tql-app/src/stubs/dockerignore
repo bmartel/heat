@@ -1,0 +1,15 @@
+node_modules
+Dockerfile
+.dockerignore
+.git
+.github
+dist
+build
+web_modules
+integrationtests
+loadtests
+.example.env
+docker-compose.yml
+LICENSE
+README.md
+
