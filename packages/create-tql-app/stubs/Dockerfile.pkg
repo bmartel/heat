@@ -24,8 +24,6 @@ RUN yarn install
 
 COPY --chown=node:node . .
 
-ENTRYPOINT yarn
-
-CMD start
+CMD yarn workspace @app/pkg start
 
 EXPOSE $PORT

@@ -22,7 +22,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
-    command: workspace @app/api start
     environment:
       PORT: ${API_PORT}
       NODE_ENV: ${NODE_ENV}
@@ -34,8 +33,9 @@ services:
       APP_SECRET: ${APP_SECRET}
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
     volumes:
-      - ./packages/api:/home/node/app
-      - api_node_modules:/home/node/app/node_modules
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+      - api_node_modules:/home/node/app/packages/api/node_modules
 
   web:
     depends_on:
@@ -46,16 +46,17 @@ services:
     build:
       context: .
       dockerfile: ./packages/web/Dockerfile
-    command: workspace @app/web start
     environment:
       PORT: ${WEB_PORT}
       NODE_ENV: ${NODE_ENV}
       API_URL: ${API_URL}
     volumes:
-      - ./packages/web:/home/node/app
-      - web_node_modules:/home/node/app/node_modules
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+      - web_node_modules:/home/node/app/packages/web/node_modules
 
 volumes:
   db_data:
+  node_modules:
   api_node_modules:
   web_node_modules:

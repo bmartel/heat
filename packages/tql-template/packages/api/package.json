@@ -2,7 +2,6 @@
   "name": "@app/api",
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
-  "type": "module",
   "dependencies": {
     "@types/node": "^12.12.6",
     "apollo-server-express": "^2.18.2",
