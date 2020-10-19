@@ -10,7 +10,7 @@
     "target": "esnext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModules": true
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist", "build"]
 }
