@@ -1,15 +1,8 @@
-0 silly argv {
-0 silly argv   _: [ 'add' ],
-0 silly argv   scope: '@martel/create-tql-app',
-0 silly argv   dev: true,
-0 silly argv   D: true,
-0 silly argv   globs: [],
-0 silly argv   lernaVersion: '3.22.1',
-0 silly argv   '$0': '../../.node_modules/bin/lerna',
-0 silly argv   pkg: '@types/decompress-targz'
-0 silly argv }
-1 notice cli v3.22.1
-2 verbose rootPath /home/brandon/code/ts-gql
-3 info versioning independent
-4 error Error: 404 Not Found - GET https://registry.npmjs.org/@types%2fdecompress-targz - Not found
-4 error     at /home/brandon/code/ts-gql/node_modules/@evocateur/npm-registry-fetch/check-response.js:104:15
+46 warn complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
+47 error Error: Command failed: git tag @martel/create-tql-app@0.1.4 -m @martel/create-tql-app@0.1.4
+47 error fatal: tag '@martel/create-tql-app@0.1.4' already exists
+47 error
+47 error     at makeError (/home/brandon/code/ts-gql/node_modules/@lerna/child-process/node_modules/execa/index.js:174:9)
+47 error     at /home/brandon/code/ts-gql/node_modules/@lerna/child-process/node_modules/execa/index.js:278:16
+47 error     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+47 error     at async Promise.all (index 0)
