@@ -1,8 +1,0 @@
-46 warn complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
-47 error Error: Command failed: git tag @martel/create-tql-app@0.1.4 -m @martel/create-tql-app@0.1.4
-47 error fatal: tag '@martel/create-tql-app@0.1.4' already exists
-47 error
-47 error     at makeError (/home/brandon/code/ts-gql/node_modules/@lerna/child-process/node_modules/execa/index.js:174:9)
-47 error     at /home/brandon/code/ts-gql/node_modules/@lerna/child-process/node_modules/execa/index.js:278:16
-47 error     at processTicksAndRejections (internal/process/task_queues.js:97:5)
-47 error     at async Promise.all (index 0)
