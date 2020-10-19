@@ -21,7 +21,7 @@ services:
     restart: always
     build:
       context: ./packages/api
-      command: start
+    command: start
     environment:
       PORT: ${API_PORT}
       NODE_ENV: ${NODE_ENV}
@@ -44,7 +44,7 @@ services:
     restart: always
     build:
       context: ./packages/web
-      command: start
+    command: start
     environment:
       PORT: ${WEB_PORT}
       NODE_ENV: ${NODE_ENV}
