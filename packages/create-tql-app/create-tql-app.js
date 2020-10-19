@@ -6,4 +6,4 @@
 // Usage:
 // `$ yarn create @martel/tql-app ./path/to/new-project`
 
-require("./lib/src/create-tql-app");
+import("./lib/src/create-tql-app");
