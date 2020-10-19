@@ -126,6 +126,19 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.private = true;
             pkg.scripts.build = "lerna run build";
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+            fs.writeFileSync(
+              path.join(newAppDir, ".gitignore"),
+              `
+node_modules
+web_modules
+build/
+dist/
+packages/*/lib/
+packages/*/dist/
+packages/*/build/
+*.log
+            `
+            );
             resolve(pkg);
           } catch (e) {
             reject(Error("Could not update project files"));
