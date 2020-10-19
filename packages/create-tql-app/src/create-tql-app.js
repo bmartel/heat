@@ -160,12 +160,12 @@ const createProjectTasks = ({ newAppDir }) => {
 
             fs.writeFileSync(
               path.join(newAppDir, "packages/api/Dockerfile"),
-              dockerfile.replaceAll("pkg", "api")
+              dockerfile.replace(/pkg/g, "api")
             );
 
             fs.writeFileSync(
               path.join(newAppDir, "packages/web/Dockerfile"),
-              dockerfile.replaceAll("pkg", "web")
+              dockerfile.replace(/pkg/g, "web")
             );
 
             fs.writeFileSync(
