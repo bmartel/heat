@@ -133,16 +133,52 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.private = true;
             pkg.scripts.build = "lerna run build";
 
-            const envFile = fs.readFileSync(
-              path.join(newAppDir, ".env.example"),
-              "utf8"
-            );
             fs.writeFileSync(
               path.join(newAppDir, ".env"),
               `
-${envFile}
 APP_SECRET=${randomString(32)}
-            `
+NODE_ENV=development
+API_PORT=3000
+WEB_PORT=8080
+
+API_URL=http://localhost:3000
+
+DB_TYPE=mongodb
+DB_HOST=mongodb
+DB_PORT=27017
+DB_USERNAME=changeme
+DB_PASSWORD=changeme
+DB_NAME=test
+`
+            );
+
+            fs.writeFileSync(
+              path.join(newAppDir, ".dockerignore"),
+              `
+node_modules
+Dockerfile
+.dockerignore
+.git
+.github
+dist
+build
+web_modules
+integrationtests
+loadtests
+.example.env
+docker-compose.yml
+LICENSE
+README.md
+`
+            );
+
+            fs.writeFileSync(
+              path.join(newAppDir, ".npmignore"),
+              `
+.build
+build
+web_modules
+`
             );
 
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
@@ -159,7 +195,7 @@ packages/*/dist/
 packages/*/build/
 *.log
 *.env
-            `
+`
             );
             resolve(pkg);
           } catch (e) {
