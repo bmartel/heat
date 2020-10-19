@@ -133,6 +133,8 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.private = true;
             pkg.scripts.build = "lerna run build";
 
+            fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+
             const envContent = fs.readfilesync(
               path.join(__dirname, "./stubs/env"),
               "utf8"
@@ -146,7 +148,21 @@ const createProjectTasks = ({ newAppDir }) => {
                 .replace(":dbname:", randomString(16))
             );
 
-            fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+            fs.writefilesync(
+              path.join(newappdir, "./packages/api/Dockerfile"),
+              fs.readfilesync(
+                path.join(__dirname, "./stubs/Dockerfile"),
+                "utf8"
+              )
+            );
+
+            fs.writefilesync(
+              path.join(newappdir, "./packages/web/Dockerfile"),
+              fs.readfilesync(
+                path.join(__dirname, "./stubs/Dockerfile"),
+                "utf8"
+              )
+            );
 
             fs.writefilesync(
               path.join(newappdir, ".dockerignore"),
