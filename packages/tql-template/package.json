@@ -16,6 +16,7 @@
     "lerna",
     "yarn",
     "monorepo",
+    "csa-template",
     "template"
   ],
   "publishConfig": {
