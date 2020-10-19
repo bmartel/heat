@@ -17,6 +17,7 @@
   },
   "files": [
     "lib",
+    "stubs",
     "create-tql-app.js"
   ],
   "engines": {
