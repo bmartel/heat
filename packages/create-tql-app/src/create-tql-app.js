@@ -136,7 +136,7 @@ const createProjectTasks = ({ newAppDir }) => {
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 
             const envContent = fs.readfilesync(
-              path.join(__dirname, "./stubs/env"),
+              path.join(__dirname, "stubs/env"),
               "utf8"
             );
             fs.writeFileSync(
@@ -149,43 +149,42 @@ const createProjectTasks = ({ newAppDir }) => {
             );
 
             fs.writefilesync(
-              path.join(newappdir, "./packages/api/Dockerfile"),
-              fs.readfilesync(
-                path.join(__dirname, "./stubs/Dockerfile"),
-                "utf8"
-              )
+              path.join(newappdir, "Makefile"),
+              fs.readfilesync(path.join(__dirname, "stubs/Makefile"), "utf8")
             );
 
             fs.writefilesync(
-              path.join(newappdir, "./packages/web/Dockerfile"),
-              fs.readfilesync(
-                path.join(__dirname, "./stubs/Dockerfile"),
-                "utf8"
-              )
+              path.join(newappdir, "packages/api/Dockerfile"),
+              fs.readfilesync(path.join(__dirname, "stubs/Dockerfile"), "utf8")
+            );
+
+            fs.writefilesync(
+              path.join(newappdir, "packages/web/Dockerfile"),
+              fs.readfilesync(path.join(__dirname, "stubs/Dockerfile"), "utf8")
             );
 
             fs.writefilesync(
               path.join(newappdir, ".dockerignore"),
               fs.readfilesync(
-                path.join(__dirname, "./stubs/dockerignore"),
+                path.join(__dirname, "stubs/dockerignore"),
                 "utf8"
               )
             );
 
             fs.writefilesync(
               path.join(newappdir, ".npmignore"),
-              fs.readfilesync(path.join(__dirname, "./stubs/npmignore"), "utf8")
+              fs.readfilesync(path.join(__dirname, "stubs/npmignore"), "utf8")
             );
 
             fs.writefilesync(
               path.join(newappdir, ".gitignore"),
-              fs.readfilesync(path.join(__dirname, "./stubs/gitignore"), "utf8")
+              fs.readfilesync(path.join(__dirname, "stubs/gitignore"), "utf8")
             );
 
             fs.writefilesync(
               path.join(newappdir, "docker-compose.yml"),
               fs.readfilesync(
-                path.join(__dirname, "./stubs/docker-compose.yml"),
+                path.join(__dirname, "stubs/docker-compose.yml"),
                 "utf8"
               )
             );

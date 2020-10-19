@@ -23,3 +23,4 @@ destroy:
 
 run:
 	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml $(cmd)
+
