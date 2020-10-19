@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "build",
+    "outDir": "lib",
     "strict": true,
     "declaration": true,
-    "lib": ["es5", "es6"],
+    "lib": ["es5", "es6", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": ["node_modules", "dist", "build", "lib"]
 }
