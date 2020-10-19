@@ -1,0 +1,13 @@
+{
+  "name": "@app/web",
+  "version": "0.1.0",
+  "description": "Awesome project developed with Hyperapp.",
+  "dependencies": {
+    "@hyperapp/html": "^1.2.3",
+    "hyperapp": "^2.0.8"
+  },
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  }
+}

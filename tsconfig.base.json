@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "build",
+    "strict": true,
+    "declaration": true,
+    "lib": ["es5", "es6"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "exclude": ["node_modules", "dist", "build"]
+}

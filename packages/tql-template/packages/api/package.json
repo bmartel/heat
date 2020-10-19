@@ -1,0 +1,19 @@
+{
+  "name": "@app/api",
+  "version": "0.1.0",
+  "description": "Awesome project developed with TypeORM.",
+  "dependencies": {
+    "@types/node": "^8.0.29",
+    "apollo-server-express": "^2.18.2",
+    "class-validator": "0.12.2",
+    "graphql": "^15.3.0",
+    "typeorm": "0.2.28",
+    "reflect-metadata": "^0.1.10",
+    "mongodb": "^3.0.8",
+    "express": "^4.17.1",
+    "ts-node": "9.0.0"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  }
+}

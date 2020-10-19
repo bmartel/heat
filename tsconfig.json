@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@martel/hyperapp-utils": ["hyperapp-utils/src"],
+      "@martel/hyperapp-middleware": ["hyperapp-middleware/src"],
+      "@martel/hyperapp-devtools": ["hyperapp-devtools/src"],
+      "@martel/*": ["*/src"]
+    }
+  }
+}

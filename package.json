@@ -1,0 +1,48 @@
+{
+  "name": "tql",
+  "version": "0.1.0",
+  "description": "A set of packages supporting typescript development with graphql",
+  "main": "index.js",
+  "author": "Brandon Martel",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "build": "lerna run build",
+    "coverage": "jest --coverage",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yml}\"",
+    "lint": "prettier --check \"src/**/*.{ts,js,json,md,yml}\"",
+    "lerna-publish": "lerna publish",
+    "test": "yarn build && yarn coverage",
+    "unit": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@martel/hyperapp-scripts-snowpack": "^0.1.2",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "husky": "4.3.0",
+    "hyperapp": "^2.0.8",
+    "jest": "26.5.3",
+    "lerna": "3.22.1",
+    "lint-staged": "10.4.0",
+    "prettier": "^2.1.2",
+    "rollup": "^2.32.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.28.0",
+    "typescript": "4.0.3"
+  }
+}
