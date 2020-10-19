@@ -67,7 +67,7 @@ if (!targetDir) {
   console.log("For example:");
   console.log(
     `  ${chalk.cyan("yarn create @martel/tql-app")} ${chalk.green(
-      "my-redwood-app"
+      "my-tql-app"
     )}`
   );
   process.exit(1);
@@ -111,18 +111,12 @@ const createProjectTasks = ({ newAppDir }) => {
     },
     {
       title: "Clean up",
-      task: () => {
+      task: async () => {
         try {
-          //fs.unlinkSync(path.join(newAppDir, "README.md"));
-          //fs.renameSync(
-          //  path.join(newAppDir, "README_APP.md"),
-          //  path.join(newAppDir, "README.md")
-          //);
-          //fs.unlinkSync(path.join(newAppDir, ".gitignore"));
-          //fs.renameSync(
-          //  path.join(newAppDir, ".gitignore.app"),
-          //  path.join(newAppDir, ".gitignore")
-          //);
+          const pkgPath = path.join(newAppDir, "package.json");
+          const { default: pkg } = await import(pkgPath);
+          pkg.private = true;
+          fs.writeSync(pkgPath, JSON.stringify(pkg));
         } catch (e) {
           throw new Error("Could not move project files");
         }
@@ -171,7 +165,7 @@ const installNodeModulesTasks = ({ newAppDir }) => {
 new Listr(
   [
     {
-      title: "Creating Redwood app",
+      title: "Creating TQL app",
       task: () => new Listr(createProjectTasks({ newAppDir })),
     },
     {
