@@ -10,17 +10,17 @@ generate_jwt_public_key:
 generate_jwt: generate_keys_dir generate_jwt_private_key generate_jwt_public_key
 
 start:
-	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml up -d
+	docker-compose -f docker-compose.yml up -d
 
 stop:
-	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml stop
+	docker-compose -f docker-compose.yml stop
 
 setup: start
-	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml up -d
+	docker-compose -f docker-compose.yml up -d
 
 destroy:
-	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml down -v
+	docker-compose -f docker-compose.yml down -v
 
 run:
-	docker-compose -f docker-compose.yml -f docker-compose.$(env).yml $(cmd)
+	docker-compose -f docker-compose.yml $(cmd)
 
