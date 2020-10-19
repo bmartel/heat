@@ -10,7 +10,6 @@
   ],
   "author": "Brandon Martel <brandonmartel@gmail.com>",
   "homepage": "https://github.com/bmartel/tql#readme",
-  "noEmit": false,
   "license": "MIT",
   "bin": "create-tql-app.js",
   "directories": {
@@ -33,7 +32,6 @@
     "url": "git+https://github.com/bmartel/tql.git"
   },
   "dependencies": {
-    "@rollup/plugin-json": "^4.1.0",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "check-node-version": "^4.0.2",
@@ -45,7 +43,7 @@
     "yargs": "^16.1.0"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "babel src -d lib"
   },
   "bugs": {
     "url": "https://github.com/bmartel/tql/issues"

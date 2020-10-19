@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 
 import decompress from "decompress";
 import decompressTargz from "decompress-targz";
@@ -47,7 +47,7 @@ const downloadFile = async (sourceUrl, targetFile) => {
 const { _: args, "yarn-install": yarnInstall } = yargs
   .scriptName(name)
   .usage("Usage: $0 <project directory> [option]")
-  .example("$0 newapp" as any)
+  .example("$0 newapp")
   .option("yarn-install", {
     default: true,
     describe: "Skip yarn install with --no-yarn-install",

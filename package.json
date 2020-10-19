@@ -31,9 +31,17 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/runtime-corejs3": "^7.12.1",
     "@martel/hyperapp-scripts-snowpack": "^0.1.2",
+    "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "core-js": "^3.6.5",
     "husky": "4.3.0",
     "hyperapp": "^2.0.8",
     "jest": "26.5.3",

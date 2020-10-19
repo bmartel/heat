@@ -1,4 +1,16 @@
 {
   "extends": "../../babel.config.json",
-  "preferBuiltins": true
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": { "node": "12.16" },
+        "useBuiltIns": "usage",
+        "corejs": {
+          "version": "3.6",
+          "proposals": true
+        }
+      }
+    ]
+  ]
 }
