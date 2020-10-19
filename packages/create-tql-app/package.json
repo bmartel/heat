@@ -1,6 +1,6 @@
 {
   "name": "@martel/create-tql-app",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "tql app generator",
   "keywords": [
     "tql",
