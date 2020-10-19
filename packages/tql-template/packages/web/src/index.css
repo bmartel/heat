@@ -1,0 +1,10 @@
+/* purgecss start ignore */
+@tailwind base;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;

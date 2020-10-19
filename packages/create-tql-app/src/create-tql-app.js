@@ -124,6 +124,7 @@ const createProjectTasks = ({ newAppDir }) => {
             pkg.description = "TODO: Add description";
             pkg.version = "0.0.1";
             pkg.private = true;
+            pkg.scripts.build = "lerna run build";
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
             resolve(pkg);
           } catch (e) {

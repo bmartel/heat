@@ -24,12 +24,11 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "start": "lerna run start",
-    "build": "lerna run build",
-    "coverage": "jest --coverage",
+    "start": "lerna run --parallel start",
+    "build": "echo \"Nothing to build\" && exit 0",
+    "test": "lerna run test",
     "format": "prettier --write \"packages/**/*.{ts,js,jsx,tsx}\"",
-    "lint": "prettier --check \"packages/**/*.{ts,js,jsx,tsx}\"",
-    "test": "jest"
+    "lint": "prettier --check \"packages/**/*.{ts,js,jsx,tsx}\""
   },
   "husky": {
     "hooks": {

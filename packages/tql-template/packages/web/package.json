@@ -1,6 +1,6 @@
 {
   "name": "@app/web",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Awesome project developed with Hyperapp.",
   "dependencies": {
     "@hyperapp/html": "^1.2.3",
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build"
+    "build": "snowpack build",
+    "test": "jest"
   }
 }
