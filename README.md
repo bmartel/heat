@@ -1,8 +1,8 @@
 # HEAT stack application
 
-[![npm
+create-heat-app [![npm
 version](https://badge.fury.io/js/%40martel%2Fcreate-heat-app.svg)](https://badge.fury.io/js/%40martel%2Fcreate-heat-app)
-[![npm
+heat-template [![npm
 version](https://badge.fury.io/js/%40martel%2Fheat-template.svg)](https://badge.fury.io/js/%40martel%2Fheat-template)
 
 > 🌶️ A spicy full stack mono repo featuring Hyperapp, Express, Apollo Graphql, and Typescript.

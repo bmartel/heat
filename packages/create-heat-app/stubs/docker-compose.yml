@@ -35,8 +35,6 @@ services:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-      - api_node_modules:/home/node/app/packages/api/node_modules
 
   web:
     depends_on:
@@ -53,11 +51,6 @@ services:
       API_URL: ${API_URL}
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-      - web_node_modules:/home/node/app/packages/web/node_modules
 
 volumes:
   db_data:
-  node_modules:
-  api_node_modules:
-  web_node_modules:
