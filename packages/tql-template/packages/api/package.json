@@ -14,7 +14,7 @@
     "ts-node": "9.0.0"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "nodemon",
     "build": "echo \"Nothing to build\" && exit 0",
     "test": "jest"
   }
