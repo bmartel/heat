@@ -1,5 +1,5 @@
 {
-  "name": "tql",
+  "name": "heat",
   "version": "0.1.0",
   "description": "A set of packages supporting typescript development with graphql",
   "main": "index.js",

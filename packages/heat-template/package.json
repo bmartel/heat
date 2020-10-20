@@ -1,16 +1,17 @@
 {
-  "name": "@martel/tql-template",
+  "name": "@martel/heat-template",
   "version": "0.1.17",
   "license": "MIT",
-  "description": "A project template for creating new tql applications",
+  "description": "A project template for creating new heat stack applications",
   "workspaces": [
     "packages/*"
   ],
   "keywords": [
-    "tql",
+    "heat",
     "typescript",
     "hyperapp",
-    "koa",
+    "express",
+    "apollo",
     "graphql",
     "mongodb",
     "lerna",

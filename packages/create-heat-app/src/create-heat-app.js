@@ -24,7 +24,7 @@ const style = {
   green: chalk.green,
 };
 
-const NPM_URL = "https://registry.npmjs.org/@martel/tql-template";
+const NPM_URL = "https://registry.npmjs.org/@martel/heat-template";
 
 const randomString = (len) =>
   crypto
@@ -66,15 +66,15 @@ const targetDir = String(args).replace(/,/g, "-");
 if (!targetDir) {
   console.error("Please specify the project directory");
   console.log(
-    `  ${chalk.cyan("yarn create @martel/tql-app")} ${chalk.green(
+    `  ${chalk.cyan("yarn create @martel/heat-app")} ${chalk.green(
       "<project-directory>"
     )}`
   );
   console.log();
   console.log("For example:");
   console.log(
-    `  ${chalk.cyan("yarn create @martel/tql-app")} ${chalk.green(
-      "my-tql-app"
+    `  ${chalk.cyan("yarn create @martel/heat-app")} ${chalk.green(
+      "my-heat-app"
     )}`
   );
   process.exit(1);
@@ -90,7 +90,7 @@ if (appDirExists && fs.readdirSync(newAppDir).length > 0) {
 
 const createProjectTasks = ({ newAppDir }) => {
   const tmpDownloadPath = tmp.tmpNameSync({
-    prefix: "tql",
+    prefix: "heat",
     postfix: ".tgz",
   });
 
@@ -121,7 +121,7 @@ const createProjectTasks = ({ newAppDir }) => {
       task: () => {
         return new Promise((resolve, reject) => {
           try {
-            const appName = newAppDir.split("/").pop() || "tql-app";
+            const appName = newAppDir.split("/").pop() || "heat-app";
             const pkgPath = path.join(newAppDir, "package.json");
             const pkgContent = fs.readFileSync(pkgPath, "utf8");
             const pkg = JSON.parse(pkgContent);
@@ -269,7 +269,7 @@ const installNodeModulesTasks = ({ newAppDir }) => {
 new Listr(
   [
     {
-      title: "Creating TQL app",
+      title: "Creating HEAT app",
       task: () => new Listr(createProjectTasks({ newAppDir })),
     },
     {
@@ -283,7 +283,7 @@ new Listr(
   .then(() => {
     [
       "",
-      style.success("Thanks for trying out TQL!"),
+      style.success("Thanks for trying out HEAT!"),
       "",
       `We've created your app in '${style.cmd(newAppDir)}'`,
       `Enter the directory and run '${style.cmd(

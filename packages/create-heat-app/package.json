@@ -1,16 +1,16 @@
 {
-  "name": "@martel/create-tql-app",
+  "name": "@martel/create-heat-app",
   "version": "0.1.31",
-  "description": "tql app generator",
+  "description": "heat app generator",
   "keywords": [
-    "tql",
+    "heat",
     "template",
     "yarn"
   ],
   "author": "Brandon Martel <brandonmartel@gmail.com>",
-  "homepage": "https://github.com/bmartel/tql#readme",
+  "homepage": "https://github.com/bmartel/heat#readme",
   "license": "MIT",
-  "bin": "create-tql-app.js",
+  "bin": "create-heat-app.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,7 +18,7 @@
   "files": [
     "lib",
     "stubs",
-    "create-tql-app.js"
+    "create-heat-app.js"
   ],
   "engines": {
     "node": ">=12.0.0",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bmartel/tql.git"
+    "url": "git+https://github.com/bmartel/heat.git"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -46,7 +46,7 @@
     "build": "babel src -d lib"
   },
   "bugs": {
-    "url": "https://github.com/bmartel/tql/issues"
+    "url": "https://github.com/bmartel/heat/issues"
   },
   "devDependencies": {
     "@types/decompress": "^4.2.3"

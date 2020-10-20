@@ -5,7 +5,7 @@ import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
 
 export default {
-  input: "src/create-tql-app.js",
+  input: "src/create-heat-app.js",
   output: {
     dir: "lib",
     format: "cjs",
