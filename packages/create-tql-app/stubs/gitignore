@@ -3,6 +3,7 @@ web_modules
 build/
 dist/
 lib/
+scripts/init-mongo.js
 packages/*/lib/
 packages/*/dist/
 packages/*/build/

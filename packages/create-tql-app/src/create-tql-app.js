@@ -139,13 +139,31 @@ const createProjectTasks = ({ newAppDir }) => {
               path.join(__dirname, "../stubs/env"),
               "utf8"
             );
+            const secrets = {
+              secret: randomString(32),
+              dbpassword: randomString(32),
+              dbusername: randomString(16),
+              dbname: randomString(16),
+            };
             fs.writeFileSync(
               path.join(newAppDir, ".env"),
               envContent
-                .replace(":secret:", randomString(32))
-                .replace(":password:", randomString(32))
-                .replace(":user:", randomString(16))
-                .replace(":dbname:", randomString(16))
+                .replace(":secret:", secrets.secret)
+                .replace(":dbpassword:", secrets.dbpassword)
+                .replace(":dbusername:", secrets.dbusername)
+                .replace(":dbname:", secrets.dbname)
+            );
+
+            const initMongoScript = fs.readFileSync(
+              path.join(__dirname, "../stubs/init-mongo.js"),
+              "utf8"
+            );
+            fs.writeFileSync(
+              path.join(newAppDir, "scripts/init-mongo.js"),
+              initMongoScript
+                .replace(":dbpassword:", secrets.dbpassword)
+                .replace(":dbusername:", secrets.dbusername)
+                .replace(":dbname:", secrets.dbname)
             );
 
             fs.writeFileSync(
