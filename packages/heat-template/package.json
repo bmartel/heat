@@ -1,6 +1,6 @@
 {
   "name": "@martel/heat-template",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "license": "MIT",
   "description": "A project template for creating new heat stack applications",
   "workspaces": [
