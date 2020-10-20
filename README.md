@@ -5,7 +5,7 @@ version](https://badge.fury.io/js/%40martel%2Fcreate-heat-app.svg)](https://badg
 [![npm
 version](https://badge.fury.io/js/%40martel%2Fheat-template.svg)](https://badge.fury.io/js/%40martel%2Fheat-template)
 
-> ✨ Quickly scaffold a fullstack mono repo featuring Hyperapp, Express, Apollo Graphql, and Typescript.
+> 🌶️ A spicy full stack mono repo featuring Hyperapp, Express, Apollo Graphql, and Typescript.
 
 Create a new project with:
 
