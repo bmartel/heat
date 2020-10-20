@@ -117,7 +117,7 @@ const createProjectTasks = ({ newAppDir }) => {
         }),
     },
     {
-      title: "Clean up",
+      title: "Finishing up",
       task: () => {
         return new Promise((resolve, reject) => {
           try {
