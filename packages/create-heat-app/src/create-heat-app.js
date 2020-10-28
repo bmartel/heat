@@ -14,6 +14,8 @@ import yargs from "yargs";
 
 import { name, version, engines } from "../package.json";
 
+const availablePackages = [];
+
 const style = {
   error: chalk.bold.red,
   warning: chalk.keyword("orange"),
@@ -24,7 +26,9 @@ const style = {
   green: chalk.green,
 };
 
-const NPM_URL = "https://registry.npmjs.org/@martel/heat-template";
+const NPM_URL = "https://registry.npmjs.org/@martel/heat-";
+
+const getPackageUrl = (pkg) => NPM_URL + pkg;
 
 const randomString = (len) =>
   crypto
@@ -32,8 +36,8 @@ const randomString = (len) =>
     .toString("hex")
     .slice(0, len);
 
-const latestReleaseTarFile = async () => {
-  const response = await axios.get(NPM_URL);
+const latestReleaseTarFile = async (pkg) => {
+  const response = await axios.get(getPackageUrl(pkg));
   const latest = response.data["dist-tags"].latest;
   return response.data.versions[latest].dist.tarball;
 };
@@ -51,7 +55,7 @@ const downloadFile = async (sourceUrl, targetFile) => {
   });
 };
 
-const { _: args, "yarn-install": yarnInstall } = yargs
+const { _: args, "yarn-install": yarnInstall, packages } = yargs
   .scriptName(name)
   .usage("Usage: $0 <project directory> [option]")
   .example("$0 newapp")
@@ -59,10 +63,14 @@ const { _: args, "yarn-install": yarnInstall } = yargs
     default: true,
     describe: "Skip yarn install with --no-yarn-install",
   })
+  .option("packages", {
+    default: "",
+    describe: "Install list of packages with --packages",
+  })
   .version(version)
   .strict().argv;
 
-const targetDir = String(args).replace(/,/g, "-");
+const targetDir = String(args).replace(/,/g, "-") || (packages ? "./" : "");
 if (!targetDir) {
   console.error("Please specify the project directory");
   console.log(
@@ -80,42 +88,62 @@ if (!targetDir) {
   process.exit(1);
 }
 
+const emptyDirectory = (dir) =>
+  !fs.existsSync(dir) || fs.readdirSync(dir).length < 1;
+
+const packageList = packages.split(",");
 const newAppDir = path.resolve(process.cwd(), targetDir);
+const packagesDir = path.join(newAppDir, "./packages");
 const appDirExists = fs.existsSync(newAppDir);
 
-if (appDirExists && fs.readdirSync(newAppDir).length > 0) {
+const createNewApp = !(appDirExists && fs.readdirSync(newAppDir).length > 0);
+const installPackages = packageList.length > 0;
+
+if (!(createNewApp || installPackages)) {
   console.error(`'${newAppDir}' already exists and is not empty.`);
   process.exit(1);
 }
 
-const createProjectTasks = ({ newAppDir }) => {
+const installPackage = ({ pkg, pkgDir }) => {
   const tmpDownloadPath = tmp.tmpNameSync({
-    prefix: "heat",
+    prefix: `heat-${pkg}`,
     postfix: ".tgz",
   });
-
   return [
     {
-      title: `${appDirExists ? "Using" : "Creating"} directory '${newAppDir}'`,
+      title: `Preparing directory '${pkgDir}'`,
       task: () => {
-        fs.mkdirSync(newAppDir, { recursive: true });
+        fs.mkdirSync(pkgDir, { recursive: true });
       },
     },
     {
-      title: "Downloading latest release",
-      task: async () => {
-        const url = await latestReleaseTarFile();
-        return downloadFile(url, tmpDownloadPath);
+      title: `Downloading latest release of @martel/heat-${pkg}`,
+      task: () => {
+        return new Promise(async (resolve, reject) => {
+          try {
+            const url = await latestReleaseTarFile(pkg);
+            await downloadFile(url, tmpDownloadPath);
+            resolve(url);
+          } catch (e) {
+            reject(Error(`Unable to download package @martel/heat-${pkg} `));
+          }
+        });
       },
     },
     {
-      title: "Extracting latest release",
+      title: `Extracting latest release of @martel/heat-${pkg}`,
       task: () =>
-        decompress(tmpDownloadPath, newAppDir, {
+        decompress(tmpDownloadPath, pkgDir, {
           strip: 1,
           plugins: [decompressTargz()],
         }),
     },
+  ];
+};
+
+const createProjectTasks = ({ newAppDir }) => {
+  return [
+    ...installPackage({ pkg: "template", pkgDir: newAppDir }),
     {
       title: "Finishing up",
       task: () => {
@@ -220,13 +248,28 @@ const createProjectTasks = ({ newAppDir }) => {
 
             resolve(pkg);
           } catch (e) {
-            console.log(e);
             reject(Error("Could not update project files"));
           }
         });
       },
     },
   ];
+};
+
+const installProjectPackages = ({ newPackageDir }) => {
+  return packageList
+    .filter((pkg) => pkg !== "template")
+    .reduce((installer, pkg) => {
+      const pkgDir = path.join(newPackageDir, `./${pkg}`);
+      if (emptyDirectory(pkgDir)) {
+        const [mkdir, download, extract] = installPackage({
+          pkg,
+          pkgDir,
+        });
+        installer.push(mkdir, download, extract);
+      }
+      return installer;
+    }, []);
 };
 
 const installNodeModulesTasks = ({ newAppDir }) => {
@@ -266,17 +309,26 @@ const installNodeModulesTasks = ({ newAppDir }) => {
   ];
 };
 
+const successMessage = createNewApp
+  ? `We've created your app in '${style.cmd(newAppDir)}'`
+  : `We've installed your packages in '${style.cmd(packagesDir)}'`;
 new Listr(
   [
-    {
+    createNewApp && {
       title: "Creating HEAT app",
       task: () => new Listr(createProjectTasks({ newAppDir })),
     },
+
+    installPackages && {
+      title: "Installing HEAT packages",
+      task: () =>
+        new Listr(installProjectPackages({ newPackageDir: packagesDir })),
+    },
     {
-      title: "Installing packages",
+      title: "Installing node_modules",
       task: () => new Listr(installNodeModulesTasks({ newAppDir })),
     },
-  ],
+  ].filter(Boolean),
   { collapse: false, exitOnError: true }
 )
   .run()
@@ -285,7 +337,7 @@ new Listr(
       "",
       style.success("Thanks for trying out HEAT!"),
       "",
-      `We've created your app in '${style.cmd(newAppDir)}'`,
+      successMessage,
       `Enter the directory and run '${style.cmd(
         "yarn start"
       )}' to start the development server.`,
