@@ -1,6 +1,6 @@
 {
   "name": "@martel/heat-storybook",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A storybook instance for hyperapp components",
   "keywords": [
     "heat",
