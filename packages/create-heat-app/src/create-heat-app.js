@@ -146,6 +146,7 @@ const installPackage = ({ pkg, pkgDir }) => {
             const pkgPath = path.join(pkgDir, "package.json");
             const pkgContent = fs.readFileSync(pkgPath, "utf8");
             const pkg = JSON.parse(pkgContent);
+            const hiddenFiles = pkg.files.filter((f) => f.startsWith("dot"));
             delete pkg.publishConfig;
             delete pkg.keywords;
             delete pkg.homepage;
@@ -158,6 +159,12 @@ const installPackage = ({ pkg, pkgDir }) => {
             pkg.version = "0.0.1";
 
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+
+            hiddenFiles.forEach((f) => {
+              const filePath = path.join(pkgDir, f);
+              const hiddenPath = path.join(pkgDir, f.replace("dot", "."));
+              fs.renameSync(filePath, hiddenPath);
+            });
 
             resolve(pkg);
           } catch (e) {
