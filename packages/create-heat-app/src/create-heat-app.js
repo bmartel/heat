@@ -138,14 +138,48 @@ const installPackage = ({ pkg, pkgDir }) => {
           plugins: [decompressTargz()],
         }),
     },
+    {
+      title: `Finishing up install of @martel/heat-${pkg}`,
+      task: () => {
+        return new Promise((resolve, reject) => {
+          try {
+            const pkgPath = path.join(pkgDir, "package.json");
+            const pkgContent = fs.readFileSync(pkgPath, "utf8");
+            const pkg = JSON.parse(pkgContent);
+            delete pkg.publishConfig;
+            delete pkg.keywords;
+            delete pkg.homepage;
+            delete pkg.repository;
+            delete pkg.bugs;
+            delete pkg.directories;
+            delete pkg.files;
+            delete pkg.engines;
+            pkg.name = pkg.name.replace("@martel/heat-", "@app/");
+            pkg.version = "0.0.1";
+
+            fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+
+            resolve(pkg);
+          } catch (e) {
+            reject(Error("Could not update package files"));
+          }
+        });
+      },
+    },
   ];
 };
 
 const createProjectTasks = ({ newAppDir }) => {
+  const [prepare, download, extract, finish] = installPackage({
+    pkg: "template",
+    pkgDir: newAppDir,
+  });
   return [
-    ...installPackage({ pkg: "template", pkgDir: newAppDir }),
+    prepare,
+    download,
+    extract,
     {
-      title: "Finishing up",
+      title: finish.title,
       task: () => {
         return new Promise((resolve, reject) => {
           try {
@@ -262,11 +296,11 @@ const installProjectPackages = ({ newPackageDir }) => {
     .reduce((installer, pkg) => {
       const pkgDir = path.join(newPackageDir, `./${pkg}`);
       if (emptyDirectory(pkgDir)) {
-        const [mkdir, download, extract] = installPackage({
+        const [prepare, download, extract, finish] = installPackage({
           pkg,
           pkgDir,
         });
-        installer.push(mkdir, download, extract);
+        installer.push(prepare, download, extract, finish);
       }
       return installer;
     }, []);

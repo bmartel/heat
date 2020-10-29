@@ -1,0 +1,55 @@
+{
+  "name": "@martel/heat-storybook",
+  "version": "0.0.1",
+  "description": "A storybook instance for hyperapp components",
+  "keywords": [
+    "heat",
+    "hyperapp",
+    "storybook"
+  ],
+  "homepage": "https://github.com/bmartel/heat#readme",
+  "license": "MIT",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmartel/heat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bmartel/heat/issues"
+  },
+  "dependencies": {
+    "@hyperapp/html": "^1.2.3",
+    "hyperapp": "^2.0.8",
+    "@martel/hyperapp-scripts-snowpack": "^0.1.2",
+    "@storybook/addon-actions": "^6.0.27",
+    "@storybook/addon-essentials": "^6.0.27",
+    "@storybook/addon-links": "^6.0.27",
+    "@storybook/node-logger": "^6.0.27",
+    "@babel/core": "^7.12.3",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^6.0.27",
+    "babel-loader": "^8.1.0",
+    "react-is": "^17.0.1",
+    "react-scripts": "^4.0.0"
+  },
+  "scripts": {
+    "start": "yarn storybook",
+    "build": "yarn build-storybook",
+    "test": "echo \"Nothing to test\" && exit 0",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
+}
