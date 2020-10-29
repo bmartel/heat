@@ -5,4 +5,5 @@ dist/
 packages/*/lib/
 packages/*/dist/
 packages/*/build/
+packages/*/storybook-static/
 *.log
