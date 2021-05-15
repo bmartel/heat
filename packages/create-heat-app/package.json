@@ -32,7 +32,7 @@
     "url": "git+https://github.com/bmartel/heat.git"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "check-node-version": "^4.0.2",
     "decompress": "^4.2.0",
